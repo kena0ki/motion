@@ -39,7 +39,7 @@ describe("as function", () => {
 describe("as function with multiple values", () => {
     test("sets initial value", async () => {
         const Component = () => {
-            const x = useMotionValue(4)
+            const x = useMotionValue(true ? 4 : "")
             const y = useMotionValue("5px")
             const z = useTransform(
                 [x, y],

@@ -48,12 +48,23 @@ export function updateAxisDelta(
     delta: AxisDelta,
     source: Axis,
     target: Axis,
-    origin?: number
+    origin?: number,
+    flg?: boolean
 ) {
     delta.origin = origin === undefined ? calcOrigin(source, target) : origin
     delta.originPoint = mix(source.min, source.max, delta.origin)
 
+    if (flg && !(window as any).initialLog) {
+        console.log("scale", delta.scale)
+        ;(window as any).initialLog = true
+    }
     delta.scale = calcLength(target) / calcLength(source)
+    if (flg) {
+        console.log("source", JSON.stringify(source), calcLength(source))
+        console.log("target", JSON.stringify(target), calcLength(target))
+        console.log("scale", delta.scale)
+        console.log(new Error().stack)
+    }
     if (isNear(delta.scale, 1, 0.0001)) delta.scale = 1
 
     delta.translate =
@@ -73,7 +84,7 @@ export function updateBoxDelta(
     target: AxisBox2D,
     origin?: number
 ): void {
-    updateAxisDelta(delta.x, source.x, target.x, origin)
+    updateAxisDelta(delta.x, source.x, target.x, origin, true)
     updateAxisDelta(delta.y, source.y, target.y, origin)
 }
 

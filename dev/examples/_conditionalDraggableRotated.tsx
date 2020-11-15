@@ -6,6 +6,7 @@ const styleA = {
     width: 300,
     height: 300,
     background: "blue",
+    rotate: 25,
 }
 const styleB = {
     width: 100,
