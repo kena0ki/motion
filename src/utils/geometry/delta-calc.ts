@@ -59,17 +59,18 @@ export function updateAxisDelta(
         ;(window as any).initialLog = true
     }
     delta.scale = calcLength(target) / calcLength(source)
-    if (flg) {
-        console.log("source", JSON.stringify(source), calcLength(source))
-        console.log("target", JSON.stringify(target), calcLength(target))
-        console.log("scale", delta.scale)
-        console.log(new Error().stack)
-    }
     if (isNear(delta.scale, 1, 0.0001)) delta.scale = 1
 
     delta.translate =
         mix(target.min, target.max, delta.origin) - delta.originPoint
     if (isNear(delta.translate)) delta.translate = 0
+    if (flg) {
+        console.log("source", JSON.stringify(source), calcLength(source))
+        console.log("target", JSON.stringify(target), calcLength(target))
+        console.log("scale", delta.scale)
+        console.log("translate", delta.translate)
+        // console.log(new Error().stack)
+    }
 }
 
 /**

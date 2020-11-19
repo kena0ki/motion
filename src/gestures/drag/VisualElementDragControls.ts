@@ -275,6 +275,8 @@ export class VisualElementDragControls {
         const transform = element.style.transform
         this.visualElement.resetTransform()
         this.visualElement.measureLayout()
+        console.log("element.style.transform", element.style.transform)
+        console.log("transform", transform)
         element.style.transform = transform
         this.visualElement.rebaseTargetBox(
             true,

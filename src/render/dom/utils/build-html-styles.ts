@@ -133,6 +133,8 @@ export function buildHTMLStyles(
      * to be based off the deltaFinal data. Any user-set origins will have been pre-baked
      * into the deltaFinal.
      */
+    // console.log('style.transform', style.transform);
+    // console.log('style.transformOrigin', style.transformOrigin);
     if (isLayoutProjectionEnabled) {
         style.transform = buildLayoutProjectionTransform(
             deltaFinal!,
@@ -174,4 +176,6 @@ export function buildHTMLStyles(
             style.transformOrigin = buildTransformOrigin(transformOrigin)
         }
     }
+    console.log("style.transform", style.transform)
+    //console.log('style.transformOrigin', style.transformOrigin);
 }

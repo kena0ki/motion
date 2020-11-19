@@ -260,7 +260,9 @@ export abstract class VisualElement<E = any> {
 
     // Set a single `latest` value
     private setSingleStaticValue(key: string, value: string | number) {
+        // console.log(new Error().stack)
         this.latest[key] = value
+        console.log("latest", JSON.stringify(this.latest))
     }
 
     // Statically set values to `latest` without needing a MotionValue
@@ -278,6 +280,7 @@ export abstract class VisualElement<E = any> {
     triggerRender = () => this.render()
 
     scheduleRender() {
+        // console.log(new Error.stack)
         sync.render(this.triggerRender, false, true)
     }
 
