@@ -176,6 +176,6 @@ export function buildHTMLStyles(
             style.transformOrigin = buildTransformOrigin(transformOrigin)
         }
     }
-    console.log("style.transform", style.transform)
+    // console.log("style.transform", style.transform)
     //console.log('style.transformOrigin', style.transformOrigin);
 }

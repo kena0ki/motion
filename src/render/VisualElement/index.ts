@@ -260,7 +260,7 @@ export abstract class VisualElement<E = any> {
 
     // Set a single `latest` value
     private setSingleStaticValue(key: string, value: string | number) {
-        // console.log(new Error().stack)
+        console.log(new Error().stack)
         this.latest[key] = value
         console.log("latest", JSON.stringify(this.latest))
     }

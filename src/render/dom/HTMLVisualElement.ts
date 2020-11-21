@@ -124,6 +124,8 @@ export class HTMLVisualElement<
     }
 
     updateConfig(config: DOMVisualElementConfig = {}) {
+        console.log(new Error().stack)
+        console.log(JSON.stringify(config))
         this.config = { ...this.defaultConfig, ...config }
     }
 
@@ -432,6 +434,7 @@ export class HTMLVisualElement<
         this.box = this.getBoundingBox()
         this.boxCorrected = copyAxisBox(this.box)
 
+        console.log("box", JSON.stringify(this.box))
         console.log("boxCorrected", JSON.stringify(this.boxCorrected))
         console.log("targetBox", JSON.stringify(this.targetBox))
         if (!this.targetBox) this.targetBox = copyAxisBox(this.box)
@@ -463,6 +466,7 @@ export class HTMLVisualElement<
      * works
      */
     resetTransform() {
+        console.log("config", JSON.stringify(this.config))
         const { transformTemplate } = this.config
         this.element.style.transform = transformTemplate
             ? transformTemplate({}, "")
@@ -476,8 +480,8 @@ export class HTMLVisualElement<
      * Set new min/max boundaries to project an axis into
      */
     setAxisTarget(axis: "x" | "y", min: number, max: number) {
-        console.log(new Error().stack)
-        console.log("min, max", min, max)
+        // console.log(new Error().stack)
+        // console.log("min, max", min, max)
         const targetAxis = this.targetBox[axis]
         targetAxis.min = min
         targetAxis.max = max
@@ -535,7 +539,9 @@ export class HTMLVisualElement<
      */
     updateLayoutDeltas() {
         console.log(new Error().stack)
-        console.log("targetBox", JSON.stringify(this.targetBox))
+        console.log("box", JSON.stringify(this.box))
+        console.log("boxCorrected", JSON.stringify(this.boxCorrected))
+        // console.log("targetBox", JSON.stringify(this.targetBox))
         /**
          * Reset the corrected box with the latest values from box, as we're then going
          * to perform mutative operations on it.
@@ -572,7 +578,9 @@ export class HTMLVisualElement<
          * to allow people to choose whether these styles are corrected based on just the
          * layout reprojection or the final bounding box.
          */
-        console.log("targetBox", JSON.stringify(this.targetBox))
+        console.log("box", JSON.stringify(this.box))
+        console.log("boxCorrected", JSON.stringify(this.boxCorrected))
+        // console.log("targetBox", JSON.stringify(this.targetBox))
         updateBoxDelta(
             this.delta,
             this.boxCorrected,
@@ -616,10 +624,11 @@ export class HTMLVisualElement<
          * applying it to the corrected box.
          */
         // console.log('targetBox', JSON.stringify(this.targetBox))
-        console.log("targetBoxFinal", JSON.stringify(this.targetBoxFinal))
+        // console.log("targetBoxFinal", JSON.stringify(this.targetBoxFinal))
+        // console.log('latest', JSON.stringify(this.latest))
         applyBoxTransforms(this.targetBoxFinal, this.targetBox, this.latest)
         // console.log('targetBox', JSON.stringify(this.targetBox))
-        console.log("targetBoxFinal", JSON.stringify(this.targetBoxFinal))
+        // console.log("targetBoxFinal", JSON.stringify(this.targetBoxFinal))
 
         /**
          * Update the delta between the corrected box and the final target box, after
